@@ -1,5 +1,6 @@
 import { Logger } from '@nestjs/common';
-import { OnGatewayConnection, OnGatewayInit, SubscribeMessage, WebSocketGateway, WebSocketServer, WsResponse } from '@nestjs/websockets';
+import { OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit, SubscribeMessage, WebSocketGateway, WebSocketServer, WsResponse } from '@nestjs/websockets';
+import { log } from 'console';
 
 import { Server, Socket } from 'socket.io';
 
@@ -9,6 +10,8 @@ import { Server, Socket } from 'socket.io';
 }) //dans les parenthese tu peux specifier quel port + nom de namespace
 
 export class ChatGateway implements OnGatewayInit, OnGatewayConnection {
+  
+
 
 
   private logger: Logger = new Logger('ChatGateway');
@@ -26,24 +29,14 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection {
   }
 
 
-
   @SubscribeMessage('msgToServer')
-  handleMessage(client: Socket, payload: string): WsResponse<string> {
-    return { event: 'msgToClient', data: payload }
+  handleMessage(client: Socket, payload: string): WsResponse<string>{
+    console.log('Emission handle message ')
+    this.server.emit('msgToClient', payload)
+    return {event: 'msgToClient', data: payload}
   }
 
-  // @SubscribeMessage('sendMessageToUser')
-  // async handleMessage(client: Socket, payload: { foruserId: string, message: string }) {
-  //   // Diffusez le message à l'utilisateur cible
-  //   this.server.to(payload.foruserId).emit('receiveMessage', payload.message);
-  // }
-
-  // handleConnection(client: Socket) {
-  //   const userId = client.handshake.query.userId; //handshake ?!
-  //   if (userId) {
-  //     client.join(userId);
-  //   }
-  // }
+ 
 
 
 }

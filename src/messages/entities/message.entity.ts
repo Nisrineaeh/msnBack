@@ -7,11 +7,11 @@ export class Message {
     id: number;
 
     @ManyToOne(type => User, user => user.sentMessages, { eager: true })
-    @JoinColumn({ name: "sender_id" }) // Cela définit explicitement le nom de la colonne
+    @JoinColumn({ name: "sender_id" }) 
     sender_id: User;
 
     @ManyToOne(type => User, user => user.receivedMessages, {eager:true})
-    @JoinColumn({ name: "receiver_id" }) // Cela définit explicitement le nom de la colonne
+    @JoinColumn({ name: "receiver_id" })
     receiver_id: User;
 
 

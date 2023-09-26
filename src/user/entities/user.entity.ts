@@ -21,7 +21,6 @@ export class User {
     @OneToMany(() => Message, message => message.receiver_id)
     receivedMessages: Message[];
 
-
 }
 
 
