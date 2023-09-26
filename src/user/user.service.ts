@@ -5,11 +5,14 @@ import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ChatGateway } from 'src/chat.gateway';
 
 @Injectable()
 export class UserService {
 
-  constructor(@InjectRepository(User) private userRepository: Repository<User>){}
+  constructor(
+    @InjectRepository(User) private userRepository: Repository<User>
+    ){}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     try {

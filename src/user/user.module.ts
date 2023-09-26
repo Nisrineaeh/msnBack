@@ -4,6 +4,7 @@ import { UserController } from './user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Message } from 'src/messages/entities/message.entity';
 import { User } from './entities/user.entity';
+import { ChatGateway } from 'src/chat.gateway';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Message, User])],

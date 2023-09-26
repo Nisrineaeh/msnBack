@@ -11,7 +11,7 @@ import { ChatGateway } from 'src/chat.gateway';
   imports: [
     TypeOrmModule.forFeature([Message, User,])],
   controllers: [MessagesController],
-  providers: [MessagesService, ChatGateway],
+  providers: [MessagesService],
 
 })
 export class MessagesModule {}
